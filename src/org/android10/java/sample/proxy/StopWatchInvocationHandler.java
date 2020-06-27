@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2014 android10.org. All rights reserved.
+ *
  * @author Fernando Cejas (the android10 coder)
  */
 package org.android10.java.sample.proxy;
@@ -14,25 +15,24 @@ import java.util.concurrent.TimeUnit;
  */
 public class StopWatchInvocationHandler implements InvocationHandler {
 
-  private final Object objectProxied;
+    private final Object objectProxied;
 
-  public StopWatchInvocationHandler(Object objectProxied) {
-    this.objectProxied = objectProxied;
-  }
+    public StopWatchInvocationHandler(Object objectProxied) {
+        this.objectProxied = objectProxied;
+    }
 
-  @Override public Object invoke(Object object, Method method, Object[] args) throws Throwable {
-    long startTime = System.nanoTime();
-    Object result = method.invoke(objectProxied, args);
-    long endTime = System.nanoTime();
+    @Override
+    public Object invoke(Object object, Method method, Object[] args) throws Throwable {
+        long startTime = System.nanoTime();
+        Object result = method.invoke(objectProxied, args);
+        long endTime = System.nanoTime();
 
-    StringBuilder message = new StringBuilder();
-    message.append(method.getName());
-    message.append(" took ");
-    message.append(TimeUnit.NANOSECONDS.toMillis(endTime - startTime));
-    message.append(" millis");
+        String message = method.getName() +
+                " took " +
+                TimeUnit.NANOSECONDS.toMillis(endTime - startTime) +
+                " millis";
+        System.out.println(message);
 
-    System.out.println(message.toString());
-
-    return result;
-  }
+        return result;
+    }
 }

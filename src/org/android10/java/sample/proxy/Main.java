@@ -4,13 +4,14 @@ import java.lang.reflect.Proxy;
 
 public class Main {
 
-  public static void main(String[] args) {
-    MySampleProxied mySampleClass = new MySampleProxiedImpl();
+    public static void main(String[] args) {
+        MySampleProxied mySampleClass = new MySampleProxiedImpl();
 
-    MySampleProxied myProxy = (MySampleProxied) Proxy.newProxyInstance(
-        MySampleProxied.class.getClassLoader(), new Class[] { MySampleProxied.class },
-        new StopWatchInvocationHandler(mySampleClass));
+        MySampleProxied myProxy = (MySampleProxied) Proxy.newProxyInstance(
+                MySampleProxied.class.getClassLoader(),
+                new Class[]{MySampleProxied.class},
+                new StopWatchInvocationHandler(mySampleClass));
 
-    myProxy.printSomethingCool();
-  }
+        myProxy.printSomethingCool();
+    }
 }
